@@ -1,9 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +20,8 @@ public class Main extends Application {
     HBox hbx;
     VBox vbx;
     BorderPane pane;
+    FlowPane flow;
+    GridPane grid;
 
     public class Containers {
 
@@ -44,19 +45,44 @@ public class Main extends Application {
             vbx.getChildren().addAll(btn1, btn2, btn3);
             return hbx;
         }
-        public BorderPane init_BorderPane(Label lbl, FlowPane flowPane, GridPane gridPane){
+        public BorderPane init_BorderPane(){
             BorderPane pane = new BorderPane();
-            pane.setTop(lbl);
-            pane.setBottom(flowPane);
+            pane.setTop(init_Label("This text"));
+            pane.setBottom(init_Flowpane(false));
             pane.setPadding(new Insets(5,5,5,5));
-            pane.setLeft(gridPane);
-            pane.setRight(gridPane);
-            Scene scene=new Scene(pane,170,170);
+            pane.setLeft(init_Gridpane());
+            pane.setRight(init_Flowpane(true));
             return pane;
         }
-        public Label label(String text){
+        public Label init_Label(String text){
             Label lbl = new Label(text);
             return lbl;
+        }
+        public FlowPane init_Flowpane(boolean vertical){
+            if(vertical) {
+                flow = new FlowPane(Orientation.VERTICAL);
+                flow.setVgap(10);
+            }
+            else {
+                flow = new FlowPane();
+                flow.setHgap(10);
+            }
+            flow.getChildren().addAll(new Button("Boton 1"), new Button("Boton 2"), new Button("Boton 3"));
+            flow.setPadding(new Insets(5,5,5,5));
+            return flow;
+        }
+        public GridPane init_Gridpane(){
+            grid = new GridPane();
+            grid.add(new Button("Posicion 0, 0"), 0, 0);
+            grid.add(new Button("Posicion 1, 0"), 1, 0);
+            grid.add(new Button("Posicion 0, 1"), 0, 1);
+            grid.add(new Button("Posicion 1, 1"), 1, 1);
+            grid.add(new Button("Posicion 0, 2"), 0, 2);
+            grid.add(new Button("Posicion 1, 2"), 1, 2);
+            grid.setPadding(new Insets(5,5,5,5));
+            grid.setHgap(10);
+            grid.setVgap(10);
+            return grid;
         }
 
     }
@@ -65,9 +91,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Containers contenedores=new Containers();
         primaryStage.setTitle("Hello World");
+        //Scene scene=new Scene(contenedores.init_Gridpane(),1280,720);;
 
-
-        Scene scene=new Scene(contenedores.init_Hbox(),125,70);;
+        Scene scene=new Scene(contenedores.init_BorderPane(),300,500);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
