@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -56,6 +57,8 @@ public class Main extends Application {
         }
         public Label init_Label(String text){
             Label lbl = new Label(text);
+
+            lbl.setAlignment(Pos.TOP_RIGHT);
             return lbl;
         }
         public FlowPane init_Flowpane(boolean vertical){
@@ -69,6 +72,8 @@ public class Main extends Application {
             }
             flow.getChildren().addAll(new Button("Boton 1"), new Button("Boton 2"), new Button("Boton 3"));
             flow.setPadding(new Insets(5,5,5,5));
+
+            flow.setAlignment(Pos.CENTER);
             return flow;
         }
         public GridPane init_Gridpane(){
@@ -82,6 +87,8 @@ public class Main extends Application {
             grid.setPadding(new Insets(5,5,5,5));
             grid.setHgap(10);
             grid.setVgap(10);
+
+            grid.setAlignment(Pos.CENTER);
             return grid;
         }
 
