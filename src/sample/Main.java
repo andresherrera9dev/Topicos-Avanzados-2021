@@ -106,86 +106,114 @@ public class Main extends Application {
 
     }
 
-    class Cuadro_magico {
-        public void iniciar(int area) {
-            int[][] matrix_cuadro_magico = new int[area][area];
-            int[] control_matrix = new int[area];
-            Random variable_random = new Random();
-            int valor_sumatoria_random = variable_random.nextInt(20) + area + 20;
-            int resta_sum = valor_sumatoria_random;
+    class Cuadro_magico_v2 {
 
-            for (int i = 0; i < area; i++) {
-                control_matrix[i] = valor_sumatoria_random;
-                System.out.println(control_matrix[i]);
+        public void iniciar(int a) {
+
+            Random random = new Random();
+            int rand_posicion = random.nextInt(3);
+            int posicion_x = 0, posicion_y = 0;
+            System.out.println("Numero random:" + rand_posicion);
+
+            switch (3) {
+                case 0:
+                    posicion_x = 0;
+                    posicion_y = (a - (a - 1) / 2) - 1;
+                    break;
+                case 1:
+                    posicion_x = (a - (a - 1) / 2) - 1;
+                    posicion_y = a - 1;
+                    break;
+                case 2:
+                    posicion_x = a - 1;
+                    posicion_y = (a - (a - 1) / 2) - 1;
+                    break;
+                case 3:
+                    posicion_x = (a - (a - 1) / 2) - 1;
+                    posicion_y = 0;
+                    break;
             }
+            System.out.println("Posicion seleccionada al azar:(" + posicion_x + ", " + posicion_y + ")");
+            int contador = 0;
 
-            System.out.println(valor_sumatoria_random);
-            int valor_rand;
-            System.out.println();
-            int valor_max = valor_sumatoria_random;
+            //0,1=3u=a-(a-1)/2=x
+            //0,2=5u=a-(a-1)/2=x
+            //0,3=7u=a-(a-1)/2=x
 
-
-
-            for (int i = 0; i < area; i++) {
+            int[][] matrix_cuadro_magico = new int[a][a];
+            for (int i = 0; i < matrix_cuadro_magico.length; i++) {
                 for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
-                    if (i == 0) {
-                        if (ii + 1 < matrix_cuadro_magico.length) {//primer ultimo caso
+                    matrix_cuadro_magico[i][ii] = 0;
+                    System.out.print(matrix_cuadro_magico[i][ii] + " (" + i + ", " + ii + ") ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+            //arriba, derecha
+            for (int i = 0; i < matrix_cuadro_magico.length; i++) {
+                for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
+                    contador++;
+                    if(i==0&&ii==0){
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
+                        posicion_x = direccion_x(ii, a - 1);
+                        posicion_y = direccion_x(i, a - 1);
+                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + posicion_x + ", " + posicion_y + ") ");
+                        System.out.print(matrix_cuadro_magico[i][ii] + " (" + i + ", " + ii + ") ");
+                        System.out.println("Caso unico, :" + contador);
+                    }
 
-                            matrix_cuadro_magico[i][ii] = resta_sum;
-                            valor_rand = variable_random.nextInt(resta_sum);
-                            if (valor_rand == 0) valor_rand++;
-                            if (valor_rand == valor_sumatoria_random) valor_rand--;
-                            while (valor_rand >= valor_sumatoria_random) valor_rand--;
-                            resta_sum -= valor_rand;
-                            matrix_cuadro_magico[i][ii] = valor_rand;
-                            System.out.print(matrix_cuadro_magico[i][ii] + " (" + resta_sum + ") ");
-                        } else {//caso normal
-                            matrix_cuadro_magico[i][ii] = resta_sum;
-                            valor_rand = variable_random.nextInt(resta_sum);
-                            if (valor_rand == 0) valor_rand++;
-                            if (valor_rand == valor_sumatoria_random) valor_rand--;
-                            while (valor_rand >= valor_sumatoria_random) valor_rand--;
-                            resta_sum -= valor_rand;
-                            matrix_cuadro_magico[i][ii] = valor_rand+resta_sum; //primer caso normal
-
-                            System.out.print(matrix_cuadro_magico[i][ii] + " (" + resta_sum + ") ");
-                        }
+                    if (matrix_cuadro_magico[i][ii] == 0) {
+                        posicion_x = direccion_x(ii, a - 1);
+                        posicion_y = direccion_x(i, a - 1);
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
+                        System.out.println("Caso 0, :" + contador);
+                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + i + ", " + ii + ") ");
                     } else {
-                        if (ii + 1 < matrix_cuadro_magico.length) {//ultimo caso de siguientes arreglos
-                            matrix_cuadro_magico[i][ii] = resta_sum;
-
-                            valor_rand = variable_random.nextInt(resta_sum);
-
-                            if (valor_rand == 0) valor_rand++;
-                            if (valor_rand == valor_sumatoria_random) valor_rand--;
-                            while (valor_rand >= valor_sumatoria_random) valor_rand--;
-                            resta_sum -= valor_rand;
-                            matrix_cuadro_magico[i][ii] = valor_rand;
-                            System.out.print(matrix_cuadro_magico[i][ii] + " (" + resta_sum + ") ");
-                        } else {// caso normal
-                            matrix_cuadro_magico[i][ii] = resta_sum;
-                            valor_rand = variable_random.nextInt(resta_sum);
-                            if (valor_rand > valor_max) ;
-                            if (valor_rand == 0) valor_rand++;
-                            if (valor_rand == valor_sumatoria_random) valor_rand--;
-                            while (valor_rand >= valor_sumatoria_random) valor_rand--;
-                            resta_sum -= valor_rand;
-                            matrix_cuadro_magico[i][ii] = valor_rand + resta_sum;
-                            System.out.print(matrix_cuadro_magico[i][ii] + " (" + resta_sum + ") ");
-                        }
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
+                        System.out.println("Caso !=0, :" + contador);
+                        posicion_x = direccion_x(ii, a - 1);
+                        posicion_y = direccion_x(i, a - 1);
+                        posicion_x = direccion_x(ii, a - 1);
+                        posicion_y = direccion_x(i, a - 1);
+                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + i + ", " + ii + ") ");
                     }
                 }
-                resta_sum = valor_sumatoria_random;
+                System.out.println();
+            }
+            for (int i = 0; i < matrix_cuadro_magico.length; i++) {
+                for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
+                    System.out.print(matrix_cuadro_magico[i][ii] + " (" + i + ", " + ii + ") ");
+                }
                 System.out.println();
             }
         }
     }
 
+    public int direccion_x(int i, int a) {
+        i++;//Horizontal
+        if (i > a) {
+            return 0;
+        } else {
+            return i;
+        }
+    }
+
+    public int direccion_y(int ii, int a) {
+        ii++;//Horizontal
+        if (ii > a) {
+            return 0;
+        } else {
+            return ii;
+        }
+
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Containers contenedores = new Containers();
         primaryStage.setTitle("Cuadro Magico");
-        Cuadro_magico juego = new Cuadro_magico();
+        Cuadro_magico_v2 juego = new Cuadro_magico_v2();
         juego.iniciar(3);
 
         Scene scene = new Scene(contenedores.init_Gridpane(), 300, 500);
