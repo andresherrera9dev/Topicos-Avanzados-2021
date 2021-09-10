@@ -149,33 +149,33 @@ public class Main extends Application {
                 System.out.println();
             }
             System.out.println();
+
+            System.out.println("Posicion:(" + posicion_x + ", " + posicion_y + ")");
             //arriba, derecha
             for (int i = 0; i < matrix_cuadro_magico.length; i++) {
                 for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
                     contador++;
-                    if(i==0&&ii==0){
-                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
-                        posicion_x = direccion_x(ii, a - 1);
-                        posicion_y = direccion_x(i, a - 1);
-                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + posicion_x + ", " + posicion_y + ") ");
-                        System.out.print(matrix_cuadro_magico[i][ii] + " (" + i + ", " + ii + ") ");
-                        System.out.println("Caso unico, :" + contador);
-                    }
+                    matrix_cuadro_magico[i][ii] = contador;
+                    if (i == 0 && ii == 0) {
+                        System.out.println("1.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
 
-                    if (matrix_cuadro_magico[i][ii] == 0) {
-                        posicion_x = direccion_x(ii, a - 1);
-                        posicion_y = direccion_x(i, a - 1);
-                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
-                        System.out.println("Caso 0, :" + contador);
-                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + i + ", " + ii + ") ");
+                        if(posicion_x> matrix_cuadro_magico.length-2)posicion_x=0;
+                        else posicion_x++;
+
+                        if(posicion_y> matrix_cuadro_magico.length-2)posicion_y=0;
+                        else posicion_y++;
+
+                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
                     } else {
-                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
-                        System.out.println("Caso !=0, :" + contador);
-                        posicion_x = direccion_x(ii, a - 1);
-                        posicion_y = direccion_x(i, a - 1);
-                        posicion_x = direccion_x(ii, a - 1);
-                        posicion_y = direccion_x(i, a - 1);
-                        System.out.println(matrix_cuadro_magico[posicion_x][posicion_y] + " (" + i + ", " + ii + ") ");
+
+
+                        if(posicion_x> matrix_cuadro_magico.length-2)posicion_x=0;
+                        else posicion_x++;
+
+                        if(posicion_y> matrix_cuadro_magico.length-2)posicion_y=0;
+                        else posicion_y++;
+
+                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
                     }
                 }
                 System.out.println();
@@ -187,25 +187,6 @@ public class Main extends Application {
                 System.out.println();
             }
         }
-    }
-
-    public int direccion_x(int i, int a) {
-        i++;//Horizontal
-        if (i > a) {
-            return 0;
-        } else {
-            return i;
-        }
-    }
-
-    public int direccion_y(int ii, int a) {
-        ii++;//Horizontal
-        if (ii > a) {
-            return 0;
-        } else {
-            return ii;
-        }
-
     }
 
 
