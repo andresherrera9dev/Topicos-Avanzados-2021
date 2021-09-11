@@ -160,12 +160,7 @@ public class Main extends Application {
                     if (i == 0 && ii == 0) {
                         matrix_cuadro_magico[posicion_x][posicion_y] = contador;
                         System.out.println("1.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + "), Valor matrix: " + matrix_cuadro_magico[posicion_x][posicion_y]);
-                        if (posicion_x == 0) posicion_x = (matrix_cuadro_magico.length - 1);
-                        else posicion_x--;
-                        if (posicion_y > matrix_cuadro_magico.length - 2) posicion_y = 0;
-                        else posicion_y++;
 
-                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + "), Valor matrix: " + matrix_cuadro_magico[posicion_x][posicion_y]);
                     } else {
                         save_posicion_x = posicion_x;
                         save_posicion_y = posicion_y;
