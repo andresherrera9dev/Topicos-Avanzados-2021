@@ -115,7 +115,7 @@ public class Main extends Application {
             int posicion_x = 0, posicion_y = 0;
             System.out.println("Numero random:" + rand_posicion);
 
-            switch (3) {
+            switch (rand_posicion) {
                 case 0:
                     posicion_x = 0;
                     posicion_y = (a - (a - 1) / 2) - 1;
@@ -155,27 +155,27 @@ public class Main extends Application {
             for (int i = 0; i < matrix_cuadro_magico.length; i++) {
                 for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
                     contador++;
-                    matrix_cuadro_magico[i][ii] = contador;
                     if (i == 0 && ii == 0) {
-                        System.out.println("1.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
+                        System.out.println("1.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")"+matrix_cuadro_magico[posicion_x][posicion_y]);
 
-                        if(posicion_x> matrix_cuadro_magico.length-2)posicion_x=0;
-                        else posicion_x++;
-
+                        if(posicion_x==0)posicion_x=(matrix_cuadro_magico.length-1);
+                        else posicion_x--;
                         if(posicion_y> matrix_cuadro_magico.length-2)posicion_y=0;
                         else posicion_y++;
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
 
-                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
+
+                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")"+matrix_cuadro_magico[posicion_x][posicion_y]);
                     } else {
 
-
-                        if(posicion_x> matrix_cuadro_magico.length-2)posicion_x=0;
-                        else posicion_x++;
-
+                        if(posicion_x==0)posicion_x=(matrix_cuadro_magico.length-1);
+                        else posicion_x--;
                         if(posicion_y> matrix_cuadro_magico.length-2)posicion_y=0;
                         else posicion_y++;
+                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
 
-                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")");
+                        System.out.println("2.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + ")"+matrix_cuadro_magico[posicion_x][posicion_y]);
                     }
                 }
                 System.out.println();
