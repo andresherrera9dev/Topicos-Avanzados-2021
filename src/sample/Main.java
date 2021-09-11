@@ -15,7 +15,6 @@ import java.util.Random;
 public class Main extends Application {
 
     static Scene scene;
-
     Button btn1;
     Button btn2;
     Button btn3;
@@ -55,7 +54,6 @@ public class Main extends Application {
             pane.setTop(init_Label("This text"));
             pane.setBottom(init_Flowpane(false));
             pane.setPadding(new Insets(5, 5, 5, 5));
-            pane.setLeft(init_Gridpane());
             pane.setRight(init_Flowpane(true));
             return pane;
         }
@@ -82,37 +80,15 @@ public class Main extends Application {
             return flow;
         }
 
-        public GridPane init_Gridpane() {
-            grid = new GridPane();
-            grid.add(new Button("Posicion 0, 0"), 0, 0);
-            grid.add(new Button("Posicion 0, 0"), 1, 0);
-            grid.add(new Button("Posicion 0, 0"), 2, 0);
-            grid.add(new Button("Posicion 0, 0"), 0, 1);
-            grid.add(new Button("Posicion 0, 0"), 1, 1);
-            grid.add(new Button("Posicion 0, 0"), 2, 1);
-            grid.add(new Button("Posicion 0, 0"), 0, 2);
-            grid.add(new Button("Posicion 0, 0"), 1, 2);
-            grid.add(new Button("Posicion 0, 0"), 2, 2);
-
-
-            grid.setPadding(new Insets(5, 5, 5, 5));
-            grid.setPrefSize(500, 300);
-            grid.setHgap(10);
-            grid.setVgap(10);
-
-            grid.setAlignment(Pos.CENTER);
-            return grid;
-        }
-
     }
 
     class Cuadro_magico_v2 {
+        int[][] matrix_cuadro_magico;
 
         public void iniciar(int a) {
-
+            matrix_cuadro_magico = new int[a][a];
             int posicion_x = 0, posicion_y = 0;
             int save_posicion_x, save_posicion_y;
-            int rotar=0;
 
             posicion_x = 0;
             posicion_y = (a - (a - 1) / 2) - 1;
@@ -124,7 +100,6 @@ public class Main extends Application {
             //0,2=5u=a-(a-1)/2=x
             //0,3=7u=a-(a-1)/2=x
 
-            int[][] matrix_cuadro_magico = new int[a][a];
             for (int i = 0; i < matrix_cuadro_magico.length; i++) {
                 for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
                     matrix_cuadro_magico[i][ii] = 0;
@@ -184,12 +159,27 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Containers contenedores = new Containers();
-        primaryStage.setTitle("Cuadro Magico");
-        Cuadro_magico_v2 juego = new Cuadro_magico_v2();
-        juego.iniciar(15);
+        Cuadro_magico_v2 jugar = new Cuadro_magico_v2();
 
-        Scene scene = new Scene(contenedores.init_Gridpane(), 300, 500);
+        int dimension = 3;
+        jugar.iniciar(dimension);
+        primaryStage.setTitle("Cuadro Magico");
+
+        grid = new GridPane();
+
+        for (int i = 0; i < dimension; i++) {
+            for (int ii = 0; ii < dimension; ii++) {
+                grid.add(new Button(Integer.toString(jugar.matrix_cuadro_magico[i][ii])), i, ii);
+            }
+        }
+        grid.setPrefSize(500, 300);
+        grid.setPadding(new Insets(15, 15, 15, 15));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPrefWidth(800);
+
+        grid.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(grid, 300, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
