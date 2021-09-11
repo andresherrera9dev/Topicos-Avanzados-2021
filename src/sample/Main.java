@@ -110,31 +110,13 @@ public class Main extends Application {
 
         public void iniciar(int a) {
 
-            Random random = new Random();
-            int rand_posicion = random.nextInt(3);
             int posicion_x = 0, posicion_y = 0;
             int save_posicion_x, save_posicion_y;
-            System.out.println("Numero random:" + rand_posicion);
+            int rotar=0;
 
+            posicion_x = 0;
+            posicion_y = (a - (a - 1) / 2) - 1;
 
-            switch (rand_posicion) {
-                case 0:
-                    posicion_x = 0;
-                    posicion_y = (a - (a - 1) / 2) - 1;
-                    break;
-                case 1:
-                    posicion_x = (a - (a - 1) / 2) - 1;
-                    posicion_y = a - 1;
-                    break;
-                case 2:
-                    posicion_x = a - 1;
-                    posicion_y = (a - (a - 1) / 2) - 1;
-                    break;
-                case 3:
-                    posicion_x = (a - (a - 1) / 2) - 1;
-                    posicion_y = 0;
-                    break;
-            }
             System.out.println("Posicion seleccionada al azar:(" + posicion_x + ", " + posicion_y + ")");
             int contador = 0;
 
@@ -173,24 +155,26 @@ public class Main extends Application {
                         if (matrix_cuadro_magico[posicion_x][posicion_y] != 0) {
                             posicion_x = save_posicion_x;
                             posicion_y = save_posicion_y;
+
+                            if (posicion_x > matrix_cuadro_magico.length) posicion_x = 0;
+                            else posicion_x++;
+                            matrix_cuadro_magico[posicion_x][posicion_y] = contador;
                         }
 
-                        while (matrix_cuadro_magico[posicion_x][posicion_y] != 0) {
-                            posicion_y++;
-                            if (posicion_y > matrix_cuadro_magico.length - 2) posicion_y = 0;
-                            System.out.println("Bucle infinito?: " + ", Direccion: (" + posicion_x + ", " + posicion_y + "), Valor matrix: " + matrix_cuadro_magico[save_posicion_x][save_posicion_y] +
-                                    ", Valor Bucle: " + posicion_x);
+                        //reparar mecananismo
+                        else {
+                            matrix_cuadro_magico[posicion_x][posicion_y] = contador;
+                            System.out.println("3.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + "), Valor matrix: " + matrix_cuadro_magico[posicion_x][posicion_y]);
                         }
 
-                        matrix_cuadro_magico[posicion_x][posicion_y] = contador;
-                        System.out.println("3.Contador:," + contador + ", Direccion: (" + posicion_x + ", " + posicion_y + "), Valor matrix: " + matrix_cuadro_magico[posicion_x][posicion_y]);
+
                     }
                 }
                 System.out.println();
             }
             for (int i = 0; i < matrix_cuadro_magico.length; i++) {
                 for (int ii = 0; ii < matrix_cuadro_magico.length; ii++) {
-                    System.out.print(matrix_cuadro_magico[i][ii] + " (" + i + ", " + ii + ") ");
+                    System.out.print(matrix_cuadro_magico[i][ii]);
                 }
                 System.out.println();
             }
@@ -203,7 +187,7 @@ public class Main extends Application {
         Containers contenedores = new Containers();
         primaryStage.setTitle("Cuadro Magico");
         Cuadro_magico_v2 juego = new Cuadro_magico_v2();
-        juego.iniciar(3);
+        juego.iniciar(15);
 
         Scene scene = new Scene(contenedores.init_Gridpane(), 300, 500);
         primaryStage.setScene(scene);
