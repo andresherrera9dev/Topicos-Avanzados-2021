@@ -1,12 +1,14 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -158,6 +160,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        int dimension = 1;
         Cuadro_magico_v2 jugar = new Cuadro_magico_v2();
         GridPane grid = new GridPane();
         BorderPane pane = new BorderPane();
@@ -173,12 +176,12 @@ public class Main extends Application {
         HBox hbx2 = new HBox();
         Button btn2 = new Button("-Reducir");
         Button btn3 = new Button("+Aumentar");
+
         hbx2.setSpacing(10);
         hbx2.setPadding(new Insets(20));
         hbx2.getChildren().addAll(btn3,btn2);
         hbx2.setAlignment(Pos.CENTER);
 
-        int dimension = 3;
         jugar.iniciar(dimension);
         primaryStage.setTitle("Cuadro Magico");
 
@@ -190,6 +193,7 @@ public class Main extends Application {
             }
         }
         grid.setPrefSize(500, 300);
+
         grid.setPadding(new Insets(15, 15, 15, 15));
         grid.setHgap(10);
         grid.setVgap(10);
